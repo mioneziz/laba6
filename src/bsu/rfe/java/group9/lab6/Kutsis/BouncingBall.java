@@ -55,6 +55,10 @@ public class BouncingBall implements Runnable {
     }
     // Метод run() исполняется внутри потока. Когда он завершает работу,
 // то завершается и поток
+    public int getSpeed()
+    {
+        return this.speed;
+    }
     public void run() {
         try {
 // Крутим бесконечный цикл, т.е. пока нас не прервут,

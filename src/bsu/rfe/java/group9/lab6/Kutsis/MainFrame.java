@@ -17,6 +17,8 @@ public class MainFrame extends JFrame {
     private static final int HEIGHT = 500;
     private JMenuItem pauseMenuItem;
     private JMenuItem resumeMenuItem;
+    private JMenuItem pauseMenuItem1;
+    private JMenuItem resumeMenuItem1;
     // Поле, по которому прыгают мячи
     private Field field = new Field();
     // Конструктор главного окна приложения
@@ -40,6 +42,8 @@ public class MainFrame extends JFrame {
 // Ни один из пунктов меню не являются
 // доступными - сделать доступным "Паузу"
                     pauseMenuItem.setEnabled(true);
+                    pauseMenuItem1.setEnabled(true);
+                    resumeMenuItem1.setEnabled(false);
                 }
             }
         };
@@ -52,6 +56,8 @@ public class MainFrame extends JFrame {
                 field.pause();
                 pauseMenuItem.setEnabled(false);
                 resumeMenuItem.setEnabled(true);
+                pauseMenuItem1.setEnabled(false);
+                resumeMenuItem1.setEnabled(true);
             }
         };
         pauseMenuItem = controlMenu.add(pauseAction);
@@ -60,11 +66,40 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent event) {
                 field.resume();
                 pauseMenuItem.setEnabled(true);
-                resumeMenuItem.setEnabled(false);
+                pauseMenuItem1.setEnabled(true);
+                resumeMenuItem1.setEnabled(true);
+                resumeMenuItem.setEnabled(true);
             }
+
         };
         resumeMenuItem = controlMenu.add(resumeAction);
         resumeMenuItem.setEnabled(false);
+        Action pauseAction1 = new AbstractAction("Приостановить движение мячей с малой скоростью"){
+            public void actionPerformed(ActionEvent event) {
+                field.pause1();
+                pauseMenuItem.setEnabled(true);
+                pauseMenuItem1.setEnabled(false);
+                resumeMenuItem1.setEnabled(true);
+                resumeMenuItem.setEnabled(true);
+            }
+        };
+        pauseMenuItem1 = controlMenu.add(pauseAction1);
+        pauseMenuItem1.setEnabled(false);
+
+        Action resumeAction1 = new AbstractAction("Возобновить движение мячей  малой скорости"){
+            public void actionPerformed(ActionEvent event) {
+                field.resume1();
+                resumeMenuItem1.setEnabled(true);
+                pauseMenuItem1.setEnabled(true);
+                pauseAction.setEnabled(true);
+                resumeMenuItem.setEnabled(true);
+            }
+        };
+        resumeMenuItem1 = controlMenu.add(resumeAction1);
+        resumeMenuItem1.setEnabled(false);
+
+
+
 // Добавить в центр граничной компоновки поле Field
         getContentPane().add(field, BorderLayout.CENTER);
     }
