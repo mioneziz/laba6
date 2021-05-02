@@ -19,8 +19,11 @@ public class MainFrame extends JFrame {
     private JMenuItem resumeMenuItem;
     private JMenuItem pauseMenuItem1;
     private JMenuItem resumeMenuItem1;
+    private JMenuItem riseVelocityItem;
+    private JMenuItem downgradeVelocityItem;
     // Поле, по которому прыгают мячи
     private Field field = new Field();
+    private BouncingBall ball=new BouncingBall(field);
     // Конструктор главного окна приложения
     public MainFrame() {
         super("Программирование и синхронизация потоков");
@@ -44,6 +47,8 @@ public class MainFrame extends JFrame {
                     pauseMenuItem.setEnabled(true);
                     pauseMenuItem1.setEnabled(true);
                     resumeMenuItem1.setEnabled(false);
+                    riseVelocityItem.setEnabled(true);
+                    downgradeVelocityItem.setEnabled(true);
                 }
             }
         };
@@ -95,8 +100,31 @@ public class MainFrame extends JFrame {
                 resumeMenuItem.setEnabled(true);
             }
         };
+
         resumeMenuItem1 = controlMenu.add(resumeAction1);
         resumeMenuItem1.setEnabled(false);
+        JMenu Velocity=new JMenu("Скорость");
+        menuBar.add(Velocity);
+        Action plusVelocity= new AbstractAction("+") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                field.plusVelocity();
+                riseVelocityItem.setEnabled(true);
+                downgradeVelocityItem.setEnabled(true);
+            }
+        };
+        riseVelocityItem = Velocity.add(plusVelocity);
+        Action downgradeVelocity= new AbstractAction("-") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               field.minusVelocity();
+                riseVelocityItem.setEnabled(true);
+                downgradeVelocityItem.setEnabled(true);
+            }
+        };
+        downgradeVelocityItem = Velocity.add(downgradeVelocity);
+
+
 
 
 

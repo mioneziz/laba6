@@ -1,5 +1,6 @@
 package bsu.rfe.java.group9.lab6.Kutsis;
 
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
@@ -17,7 +18,7 @@ public class BouncingBall implements Runnable {
     private double x;
     private double y;
     // Вертикальная и горизонтальная компонента скорости
-    private int speed;
+    public int speed;
     private double speedX;
     private double speedY;
     // Конструктор класса BouncingBall
@@ -58,6 +59,14 @@ public class BouncingBall implements Runnable {
     public int getSpeed()
     {
         return this.speed;
+    }
+
+    public void setSpeed(int newSpeed) {
+        if (newSpeed > MAX_SPEED) {
+            speed = MAX_SPEED;
+        } else {
+            speed = newSpeed;
+        }
     }
     public void run() {
         try {
@@ -103,6 +112,7 @@ public class BouncingBall implements Runnable {
 // Если нас прервали, то ничего не делаем
 // и просто выходим (завершаемся)
         }
+
     }
     // Метод прорисовки самого себя
     public void paint(Graphics2D canvas) {

@@ -63,6 +63,25 @@ public class Field extends JPanel {
         resume1=true;
         notifyAll();
     }
+    public synchronized void plusVelocity()
+    {
+        for(BouncingBall ball: balls)
+        { int newSpeed = ball.getSpeed();
+         if (ball.getSpeed()<15){
+        ball.setSpeed(newSpeed+1);
+            }
+        }
+    }
+    public synchronized void minusVelocity()
+    {
+        for(BouncingBall ball: balls)
+        { int newSpeed = ball.getSpeed();
+        if(ball.getSpeed()>0){
+            ball.setSpeed(newSpeed-1);
+            }
+        }
+    }
+
     // Метод синхронизированный, т.е. только один поток может
 // одновременно быть внутри
     public synchronized void resume() {
@@ -77,7 +96,7 @@ public class Field extends JPanel {
     public synchronized void canMove(BouncingBall ball) throws
             InterruptedException {
         if(paused1){
-            if(ball.getSpeed()<5){
+            if(ball.getSpeed() < 5){
                 wait();
             }
         }
